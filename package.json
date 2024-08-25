@@ -13,5 +13,8 @@
   "dependencies": {
     "concurrently": "^8.2.2",
     "fullstack-project": "file:"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.17"
   }
 }
