@@ -21,14 +21,14 @@ app.get("/", (req, res) => {
 
 
 // Example GET route
-app.get("/api/posts", (req: any, res: { json: (arg0: any) => void; }) => {
+app.get("/todolist", (req: any, res: { json: (arg0: any) => void; }) => {
   const posts = postRepository.getAllPosts();
   //todoList.push(...posts);
   res.json(posts);
 });
 
 // Example POST route
-app.post("/api/posts", (req, res) => {
+app.post("/todolist", (req, res) => {
   const contents = Object.values(req.query); 
   const newPost = postRepository.createPost(contents);
   //todoList.push(req.query);
@@ -36,7 +36,7 @@ app.post("/api/posts", (req, res) => {
 });
 
 // Example DELETE route
-app.delete("/api/posts", (req, res) => {
+app.delete("/todolist", (req, res) => {
   const id = Number(req.query.id);
   console.log("delete id ", id);
   const post = postRepository.deletePost(id);
@@ -44,7 +44,7 @@ app.delete("/api/posts", (req, res) => {
 });
 
 // Example Update route
-app.put("/api/posts", (req, res) => {
+app.put("/todolist", (req, res) => {
   const contents = Object.values(req.query); 
   const newPost = postRepository.updatePost(contents);
 
