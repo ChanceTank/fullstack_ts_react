@@ -1,7 +1,7 @@
 import { parseArgs } from 'util';
 import fs from "fs";
 import path from "path";
-import Todo from "../../Shared/todo";
+import ToDo from "./todos/todo";
 
 export default class PostRepository {
 	filePath: string; // Declare the filePath property
@@ -43,15 +43,15 @@ export default class PostRepository {
 	}
 
 	createPost(post: any) {
-		let newPost: Todo;
+		let newPost: ToDo;
 
 		if (post.length > 2) {
 			post[0] = Number(post[0]);
-			newPost = new Todo(post[0], post[1], post[2]);
+			newPost = new ToDo(post[0], post[1], post[2]);
 		}
 
 		else {
-			newPost = new Todo(this.posts.length + 1, post[0], post[1]);
+			newPost = new ToDo(this.posts.length + 1, post[0], post[1]);
 		}
 
 		this.posts.push(newPost);
@@ -70,14 +70,14 @@ export default class PostRepository {
 	}
 	
 	updatePost(change: any) {
-		let newPost: Todo;
-		newPost = new Todo(change[0], change[1], change[2]);
+		let newPost: ToDo;
+		newPost = new ToDo(change[0], change[1], change[2]);
 		
 		const index = this.posts.findIndex((post) => post.id == newPost.id);
 		if (index >= 0) {
 			this.posts[index].id = newPost.id;
-			this.posts[index].title = newPost.title;
-			this.posts[index].completed = newPost.completed;
+			this.posts[index].title = newPost.content;
+			this.posts[index].completed = newPost.isCompleted;
 			this.savePosts();
 		}
 		return this.posts

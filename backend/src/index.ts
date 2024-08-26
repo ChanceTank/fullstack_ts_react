@@ -1,4 +1,4 @@
-import Todo from "../../Shared/todo";
+import Todo from "./todos/todo";
 import express from "express";
 import cors from "cors";
 import PostRepository from "./postRepo";
