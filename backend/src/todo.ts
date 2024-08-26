@@ -24,8 +24,11 @@ export default class ToDo {
                     break;
             }
         } else {
-
             this.isCompleted = isCompleted;
         }
+    }
+
+    completeTask(): void {
+        this.isCompleted = !this.isCompleted;
     }
 }

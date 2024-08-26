@@ -3,7 +3,7 @@ import ToDo from './todo';
 
 type ListProps = {
   toDoList: ToDo[];
-  toggleTask: ({ id }: { id: number }) => void; 
+  toggleTask: ({ updateTask }: { updateTask: ToDo }) => void; 
 };
 
 
@@ -28,8 +28,8 @@ function List({ toDoList, toggleTask }: ListProps) {
             <input
               type='checkbox'
               checked={toDo.isCompleted}
-              onChange={() => {
-                toggleTask({ id: toDo.id });
+              onChange={() => {console.log("toggle ", toDo);
+                toggleTask({ updateTask: toDo});
               }}
             />
           </li>

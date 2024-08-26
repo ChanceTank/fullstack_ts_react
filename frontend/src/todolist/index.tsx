@@ -22,7 +22,12 @@ export default function Tasks() {
 
 	//adds a task to the state
 	const addToDo = (toDo: ToDo): void => {
-		setList([...toDoState, toDo]);
+		setList([...toDoState, toDo]); //save to state
+		//put to backend
+		console.log("POST to backend ", toDo);
+		axios.post(taskListUrl, toDo).then((response) => {
+			console.log(response);
+		});
 	};
 
 	const fetchData = async () => {
@@ -34,24 +39,38 @@ export default function Tasks() {
 		}
 	};
 
-	function toggleTask({ id }: { id: number }): void {
-        setList((prevState) =>
-            prevState.map((task) =>
-                task.id === id ? { ...task, isCompleted: !task.isCompleted } : task
-            )
-        );
+	function toggleTask({ updateTask }: { updateTask: ToDo }): void {
+		updateTask.isCompleted = !updateTask.isCompleted;
+		setList(
+			toDoState.map((task) => {
+				if (task.id === updateTask.id) {
+					return {
+						...task,
+						isCompleted: updateTask.isCompleted
+					};
+				}
+				return task;
+			})
+		);
+		//put to backend the update to isCompleted
+		axios.put(`${taskListUrl}`, updateTask).then((response) => {
+			console.log(response);
+		});
 	}
-    
-    function clearCompleted(){
-        setList(toDoState.filter((task) => !task.isCompleted));
-    };
+
+	function clearCompleted() {
+		setList(toDoState.filter((task) => !task.isCompleted));
+	}
 
 	return (
 		<div>
-			<button onClick={fetchData}>Load Backend in Frontend</button>
-			<p />
-			<button onClick={() => setList([])}>Clear</button>
-			<p>{toDoState && JSON.stringify(toDoState)}</p>
+			<div>
+				{/*you can use the hidden to block out stuff during development*/}
+				<button onClick={fetchData}>Load Backend in Frontend</button>
+				<p />
+				<button onClick={() => setList([])}>Clear</button>
+				<p>{toDoState && JSON.stringify(toDoState)}</p>
+			</div>
 			<section>
 				<Form addToDo={(toDo: ToDo) => addToDo(toDo)} />
 				<List toDoList={toDoState} toggleTask={toggleTask} />

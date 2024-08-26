@@ -1,7 +1,7 @@
 import { parseArgs } from 'util';
 import fs from "fs";
 import path from "path";
-import ToDo from "./todos/todo";
+import ToDo from "./todo";
 
 export default class PostRepository {
 	filePath: string; // Declare the filePath property
@@ -73,11 +73,13 @@ export default class PostRepository {
 		let newPost: ToDo;
 		newPost = new ToDo(change[0], change[1], change[2]);
 		
+		console.log("backend got ", newPost);
+		
 		const index = this.posts.findIndex((post) => post.id == newPost.id);
 		if (index >= 0) {
 			this.posts[index].id = newPost.id;
-			this.posts[index].title = newPost.content;
-			this.posts[index].completed = newPost.isCompleted;
+			this.posts[index].content = newPost.content;
+			this.posts[index].isCompleted = newPost.isCompleted;
 			this.savePosts();
 		}
 		return this.posts

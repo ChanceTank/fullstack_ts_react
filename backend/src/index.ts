@@ -1,4 +1,4 @@
-import Todo from "./todos/todo";
+//import Todo from "./todos/todo";
 import express from "express";
 import cors from "cors";
 import PostRepository from "./postRepo";
@@ -29,7 +29,8 @@ app.get("/todolist", (req: any, res: { json: (arg0: any) => void; }) => {
 
 // Example POST route
 app.post("/todolist", (req, res) => {
-  const contents = Object.values(req.query); 
+  const contents = Object.values(req.body); 
+  console.log("Backend got ", contents);
   const newPost = postRepository.createPost(contents);
   //todoList.push(req.query);
   res.status(201).json(newPost);
@@ -37,7 +38,7 @@ app.post("/todolist", (req, res) => {
 
 // Example DELETE route
 app.delete("/todolist", (req, res) => {
-  const id = Number(req.query.id);
+  const id = Number(req.body.id);
   console.log("delete id ", id);
   const post = postRepository.deletePost(id);
   res.json(post);
@@ -45,7 +46,10 @@ app.delete("/todolist", (req, res) => {
 
 // Example Update route
 app.put("/todolist", (req, res) => {
-  const contents = Object.values(req.query); 
+  
+  const contents = Object.values(req.body); 
+
+  console.log("Backend got PUT command ", contents);
   const newPost = postRepository.updatePost(contents);
 
   /* const index = todoList.findIndex((todo) => todo.id === Number(contents[0]));

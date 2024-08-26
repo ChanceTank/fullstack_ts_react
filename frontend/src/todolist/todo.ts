@@ -3,13 +3,13 @@ export default class ToDo {
     content: string;
     isCompleted: boolean;
 
-    constructor(id: number | string, title: string, isCompleted: boolean | string) {
+    constructor(id: number | string, content: string, isCompleted: boolean | string) {
         if (typeof id === 'string') {
             this.id = Number(id);
         } else {
             this.id = id;
         }
-        this.content = title;
+        this.content = content;
 
         if (typeof isCompleted === 'string') {
             switch (isCompleted.toLowerCase()) {
@@ -24,8 +24,8 @@ export default class ToDo {
                     break;
             }
         } else {
-
             this.isCompleted = isCompleted;
         }
     }
+
 }

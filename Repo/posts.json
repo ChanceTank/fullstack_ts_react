@@ -1,17 +1,12 @@
 [
   {
-    "id": 1,
-    "title": "apples",
-    "completed": false
+    "id": 1724713223243,
+    "content": "777",
+    "isCompleted": false
   },
   {
-    "id": 2,
-    "title": "pinecone",
-    "completed": true
-  },
-  {
-    "id": 3,
-    "title": "apples",
-    "completed": false
+    "id": 1724715424682,
+    "content": "77",
+    "isCompleted": true
   }
 ]
