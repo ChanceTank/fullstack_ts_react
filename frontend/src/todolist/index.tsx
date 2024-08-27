@@ -59,12 +59,25 @@ export default function Tasks() {
 	}
 
 	function clearCompleted() {
+		//delete from backend
+		toDoState.forEach((task) => {
+			if (task.isCompleted) {
+				axios.delete(`${taskListUrl}`, { data: { id: task.id } }).then((response) => {
+					console.log(response);
+				});
+			}
+		});
+		
+		
+		//clear from ui
 		setList(toDoState.filter((task) => !task.isCompleted));
+		
+		
 	}
 
 	return (
 		<div>
-			<div>
+			<div hidden>
 				{/*you can use the hidden to block out stuff during development*/}
 				<button onClick={fetchData}>Load Backend in Frontend</button>
 				<p />

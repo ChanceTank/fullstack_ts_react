@@ -1,15 +1,14 @@
-
-import ToDo from './todo';
+import { useState } from "react";
+import ToDo from "./todo";
 
 type ListProps = {
-  toDoList: ToDo[];
-  toggleTask: ({ updateTask }: { updateTask: ToDo }) => void; 
+	toDoList: ToDo[];
+	toggleTask: ({ updateTask }: { updateTask: ToDo }) => void;
 };
-
 
 /**
  * Renders a list of to-do items.
- * takes the toDoList state, and the toggleTask function 
+ * takes the toDoList state, and the toggleTask function
  * as props and returns them in an HTML list.
  *
  * @component
@@ -19,23 +18,33 @@ type ListProps = {
  * @returns {JSX.Element} The rendered list of to-do items.
  */
 function List({ toDoList, toggleTask }: ListProps) {
-  return (
-    <ul className='list'>
-      {toDoList.map((toDo) => {
-        return (
-          <li key={toDo.id}>
-            <p className='task-text'>{toDo.content}</p>
-            <input
-              type='checkbox'
-              checked={toDo.isCompleted}
-              onChange={() => {console.log("toggle ", toDo);
-                toggleTask({ updateTask: toDo});
-              }}
-            />
-          </li>
-        );
-      })}
-    </ul>
-  );
+	const [isHovered, setIsHovered] = useState(false); // Declare and initialize the 'isHovered' state
+	return (
+		<ul className="list">
+			{toDoList.map((toDo) => {
+				return (
+					<li key={toDo.id}>
+						<p
+							className={`task-text ${isHovered ? "highlight" : ""}`}
+							onMouseEnter={() => setIsHovered(true)}
+							onMouseLeave={() => setIsHovered(false)}>
+							{toDo.content}{" "}
+						</p>
+						<div className="CompletedBox" style={{ textAlign: "right" }}>
+							Completed:{" "}
+							<input
+								type="checkbox"
+								checked={toDo.isCompleted}
+								onChange={() => {
+									console.log("toggle ", toDo);
+									toggleTask({ updateTask: toDo });
+								}}
+							/>
+						</div>
+					</li>
+				);
+			})}
+		</ul>
+	);
 }
 export default List;
