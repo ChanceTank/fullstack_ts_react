@@ -36,7 +36,6 @@ function List({ toDoList, toggleTask }: ListProps) {
 								type="checkbox"
 								checked={toDo.isCompleted}
 								onChange={() => {
-									console.log("toggle ", toDo);
 									toggleTask({ updateTask: toDo });
 								}}
 							/>

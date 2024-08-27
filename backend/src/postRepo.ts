@@ -73,7 +73,6 @@ export default class PostRepository {
 		let newPost: ToDo;
 		newPost = new ToDo(change[0], change[1], change[2]);
 		
-		console.log("backend got ", newPost);
 		
 		const index = this.posts.findIndex((post) => post.id == newPost.id);
 		if (index >= 0) {

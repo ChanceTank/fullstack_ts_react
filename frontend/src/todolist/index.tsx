@@ -24,7 +24,6 @@ export default function Tasks() {
 	const addToDo = (toDo: ToDo): void => {
 		setList([...toDoState, toDo]); //save to state
 		//put to backend
-		console.log("POST to backend ", toDo);
 		axios.post(taskListUrl, toDo).then((response) => {
 			console.log(response);
 		});
